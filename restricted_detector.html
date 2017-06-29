@@ -1,4 +1,43 @@
-<script>
-$(document).ready(function() {
-});
-</script>
+<html>
+    <body>
+        <div class="input-area" id="input-local" style="display: block;">
+		    <div class="text-center">
+				Choose a CSV file containing YouTube video urls to be categorized.
+			</div>
+            <input type="file" id="files">
+        </div>
+        <button id="submit" class="green">Submit</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="http://papaparse.com/resources/js/papaparse.js"></script>
+        <script>
+        $('#submit').click(function() {
+            // Read list of YouTube video urls from CSV, config is set to tab delimiter
+            $('#files').parse({
+                config:{
+                    delimiter: "\t",
+                    complete: function(results, file){
+                        console.log("Parsing complete:", results, file);
+                    }
+                },
+                before: function(file, inputElem)
+                {
+                    console.log("Parsing file...", file);
+                },
+                error: function(err, file)
+                {
+                    console.log("ERROR:", err, file);
+                },
+                complete: function()
+                {
+                    console.log("Done with file");
+                }
+            });
+
+            // For each YouTube url determine whether it is avaiable in restricted mode
+
+            // Return results
+        });
+        </script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </body>
+</html>
