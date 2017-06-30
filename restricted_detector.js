@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    filedata = fs.read('youtube_urls_normal.txt'), // read the file into a single string
+    filedata = fs.read('youtube_urls_incognito.txt'), // read the file into a single string
     urls = JSON.parse(filedata) // parse the data containing urls into an array
 var url_results = [];
 var page = require('webpage').create();
@@ -39,7 +39,7 @@ function main() {
 // Function to return the results and exit
 function exit() {
     console.log(JSON.stringify(url_results));
-    console.log("Total restricted: ", url_results.length);
+    console.log("Total urls processed: ", url_results.length);
     phantom.exit(0);
 }
 
